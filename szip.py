@@ -5,18 +5,7 @@ import platform
 import gzip
 import sys
 from termcolor import colored
-
 from cryptography.fernet import Fernet
-
-
-# from cryptography.hazmat.backends import default_backend
-# from cryptography.hazmat.primitives import hashes
-# from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
-
-
-# listkun = [1, 1, 2, 3, 45, 65, 7][:-1]
-# print("/".join(map(str, listkun)))
-
 
 def create_parser():
     parser = argparse.ArgumentParser(description="Compress your data with encryption")
@@ -25,30 +14,6 @@ def create_parser():
     parser.add_argument("-u", "--unsubscribe", help="If you don't like SecuredZip")
     return parser
 
-
-# def save_salt(salt, data_path):
-#     sep = "/"
-#     if platform.system() == "Windows":
-#         sep = "\\"
-#     data_dir = data_path.split(sep)[:-1]
-#     data_dir = sep.join(data_dir)
-#     salt_path = data_dir+sep+"/salt"
-#     file = open(salt_path,"w")
-#     file.write(salt)
-#     file.close()
-#     # TODO save salt to file
-
-
-# def encrypt(compressed_data, password, data_path):
-#     salt = os.urandom(16)
-#     save_salt(salt, data_path)
-#     kdf = PBKDF2HMAC(
-#         algorithm=hashes.SHA256(),
-#         length=32,
-#         salt=salt,
-#         iterations=100000,
-#         backend=default_backend()
-#     )
 class AlreadyEncrypted(Exception):
     pass
 
@@ -144,3 +109,35 @@ def handle_args(args=None):
 
 if __name__ == '__main__':
     handle_args()
+
+# In case of very passionate to implement own's backend
+# from cryptography.hazmat.backends import default_backend
+# from cryptography.hazmat.primitives import hashes
+# from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
+
+
+# listkun = [1, 1, 2, 3, 45, 65, 7][:-1]
+# print("/".join(map(str, listkun)))
+# def save_salt(salt, data_path):
+#     sep = "/"
+#     if platform.system() == "Windows":
+#         sep = "\\"
+#     data_dir = data_path.split(sep)[:-1]
+#     data_dir = sep.join(data_dir)
+#     salt_path = data_dir+sep+"/salt"
+#     file = open(salt_path,"w")
+#     file.write(salt)
+#     file.close()
+#     # TODO save salt to file
+
+
+# def encrypt(compressed_data, password, data_path):
+#     salt = os.urandom(16)
+#     save_salt(salt, data_path)
+#     kdf = PBKDF2HMAC(
+#         algorithm=hashes.SHA256(),
+#         length=32,
+#         salt=salt,
+#         iterations=100000,
+#         backend=default_backend()
+#     )
